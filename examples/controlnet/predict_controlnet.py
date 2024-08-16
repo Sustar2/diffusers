@@ -8,7 +8,7 @@ def load_predict_model(base_model_path, controlnet_path):
     pipe = StableDiffusionControlNetPipeline.from_pretrained(
         base_model_path, controlnet=controlnet, torch_dtype=torch.float16
     )
-
+    pipe.safety_checker = lambda images, clip_input: (images, None)
     # speed up diffusion process with faster scheduler and memory optimization
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
     # remove following line if xformers is not installed or when using Torch 2.0.
@@ -65,10 +65,10 @@ def predict_app(base_model_path, controlnet_path, json_file, predict_folder, sav
 
 if __name__ == "__main__":
     base_model_path = "runwayml/stable-diffusion-v1-5"
-    controlnet_model_path = "/nfsv4/23062676g/Network_python/diffusers/examples/controlnet/models07301117"
-    json_file = "/nfsv4/23062676g/Lunar_Dataset/NAC_sd_dataset2/val.json"
-    predict_folder = "/nfsv4/23062676g/Lunar_Dataset/NAC_sd_dataset2"
-    save_folder = "/nfsv4/23062676g/Network_python/diffusers/examples/controlnet/models07301117/predict"
+    controlnet_model_path = "/nfsv4/23062676g/Network_python/diffusers/examples/controlnet/models08121347"
+    json_file = "/nfsv4/23062676g/Lunar_Dataset/NAC_sd_dataset5/val.json"
+    predict_folder = "/nfsv4/23062676g/Lunar_Dataset/NAC_sd_dataset5"
+    save_folder = os.path.join(controlnet_model_path, 'predict' + os.path.basename(controlnet_model_path)[6:] + '_2')
 
     os.makedirs(save_folder, exist_ok=True)
     predict_app(base_model_path, controlnet_model_path, json_file, predict_folder, save_folder)
