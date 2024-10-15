@@ -100,11 +100,11 @@ def predict_app(base_model_path, controlnet_path, json_file, predict_folder, sav
 
 if __name__ == "__main__":
     base_model_path = "/nfsv4/23062676g/Network_python/diffusers/examples/controlnet/stable-diffusion-v1-5"
-    controlnet_model_path = "/nfsv4/23062676g/Network_python/diffusers/examples/controlnet/models_train10071452"
+    controlnet_model_path = "/nfsv4/23062676g/Network_python/diffusers/examples/controlnet/models_train10141027"
     json_file = "/nfsv4/23062676g/Lunar_Dataset/NAC_sd_dataset_loss_light_normalise_filter/val.json"
     predict_folder = "/nfsv4/23062676g/Lunar_Dataset/NAC_sd_dataset_loss_light_normalise_filter"
     save_folder = os.path.join(controlnet_model_path, 'predict' + os.path.basename(controlnet_model_path)[6:] + '_' +
-                               os.path.basename(predict_folder)[-1:] + '_20_3')
+                               os.path.basename(predict_folder)[-1:] + '_20')
 
     os.makedirs(save_folder, exist_ok=True)
     predict_app(base_model_path, controlnet_model_path, json_file, predict_folder, save_folder)
